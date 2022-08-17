@@ -301,99 +301,322 @@ let superheroesDetails = [
 } */
 
 /* -------------------------------forEach--------------------------------- */
-superheroesDetails.forEach(hero => {
-        //console.log(hero);
-        if (hero.isDC) {
-                //console.log(`${hero.name} is in the Justice League`);
-            } else {
-                //console.log(`${hero.name} is a superhero!`);
-            }
+superheroesDetails.forEach((hero) => {
+    //console.log(hero);
+    if (hero.isDC) {
+        //console.log(`${hero.name} is in the Justice League`);
+    } else {
+        //console.log(`${hero.name} is a superhero!`);
+    }
 });
 
 /* ------------------------------------.map and .filter   -         */
 const outfits = [
-        {
-          id: 1,
-          bottoms: "slacks",
-          top: "orange",
-          shoes: "leather",
-          style: "formal",
-          own: false
-        },
-        {
-          id: 3,
-          bottoms: "jeans",
-          top: "t-shirt",
-          shoes: "flip flops",
-          type: "casual",
-          own: true
-        },
-        {
-          id: 2,
-          bottoms: "yoga",
-          top: "tank top",
-          shoes: "flip flops",
-          type: "casual",
-          own: false
-        },
-        {
-          id: 9,
-          bottoms: "skirt",
-          top: "blouse",
-          shoes: "heals",
-          type: "formal",
-          own: true
-        },
-        {
-          id: 6,
-          bottoms: "shorts",
-          top: "tank top",
-          shoes: "none",
-          type: "casual",
-          own: true
-        },
-        {
-          id: 7,
-          bottoms: "jeans",
-          top: "sweater",
-          shoes: "boots",
-          type: "casual",
-          own: true
-        },
-        {
-          id: 8,
-          bottoms: "slacks",
-          top: "button down",
-          shoes: "dress",
-          type: "formal",
-          own: false
-        },
-      ]
-      
+    {
+        id: 1,
+        bottoms: "slacks",
+        top: "orange",
+        shoes: "leather",
+        style: "formal",
+        own: false,
+    },
+    {
+        id: 3,
+        bottoms: "jeans",
+        top: "t-shirt",
+        shoes: "flip flops",
+        type: "casual",
+        own: true,
+    },
+    {
+        id: 2,
+        bottoms: "yoga",
+        top: "tank top",
+        shoes: "flip flops",
+        type: "casual",
+        own: false,
+    },
+    {
+        id: 9,
+        bottoms: "skirt",
+        top: "blouse",
+        shoes: "heals",
+        type: "formal",
+        own: true,
+    },
+    {
+        id: 6,
+        bottoms: "shorts",
+        top: "tank top",
+        shoes: "none",
+        type: "casual",
+        own: true,
+    },
+    {
+        id: 7,
+        bottoms: "jeans",
+        top: "sweater",
+        shoes: "boots",
+        type: "casual",
+        own: true,
+    },
+    {
+        id: 8,
+        bottoms: "slacks",
+        top: "button down",
+        shoes: "dress",
+        type: "formal",
+        own: false,
+    },
+];
+
+/* ------------------------------------COPY ARRAY---------------*-------------*/
+
 /* considering the array outfits, use map, filter and find to do the following */
-      //Make a copy of outfits called outfitsCopy that can be modified without changing outfits directly.
-      //Change a value on outfitsCopy and use console logs to show you did not change outfits//Make a copy (map) of outfits with the added property of accessories.  Make accessories always false.
-      //Make a copy (map) of outfits that contains on the properties of id, bottoms, tops and shoes
-      //filter outfits to give only outfits that are casual
-      // filter outfits to give only outfits that are owned
-      // use find to return an outfit that has no shoes
-      // use find to return an outfit that has boots//Bonus:// use find to return an outfit that has jeans and a t-shirt
-      
+//1-Make a copy of outfits called outfitsCopy that can be modified without changing outfits directly.
 
+/* -------------shallow copy---------------  */
+//const outfitsCopy = outfits.slice();
+//const outfitsCopy = [...outfits]; // 3dots for remove brackets   ES6
 
+/* -------------deep copy------------------- */
+//const outfitsCopy = JSON.parse(JSON.stringify(outfits));
+//const outfitsCopy = outfits.map(a => Object.assign({}, a));
+//const outfitsCopy = outfits.map((a) => ({ ...a }));
+const outfitsCopy = outfits.map((a) => ({ ...a , accessories:false }));
+//console.log(outfitsCopy);
+
+/* ---------------------------------TEST ARRAY COPY------------------------ */
+//2-Change a value on outfitsCopy and use console logs to show you did not change outfits
+// outfitsCopy[1].id = 55;
+// outfits[1].id = 33
+// console.log(outfitsCopy[1])
+// console.log(outfits[1])
+
+/* -------------------LOOP THROUGH ARRAY (WITH FOR OF)-------------------------------*/
+//let outfits_TABLES = ` `;
+
+// for (let item of outfitsCopy) {
+//     //console.log(item);
+//     for (let key in item) {
+//         const value = item[key];
+//         //console.log(key);
+//         //console.log(value);
+//         //console.log(`${key} : ${value}`);
+//         //outfits_TABLES += `{${key} : ${value}}`;
+//     }
+// }
+//console.log(outfits_TABLES);
+
+/* -------------------LOOP THROUGH ARRAY (WITH MAP)-------------------------------*/
+//3-Make a copy (map) of outfits with the added property of accessories.  Make accessories always false.
+outfitsCopy.map((a) => {
+    a.accessories = false;
+    //     outfitsCopy[0].AAA = "A1";
+    //     outfitsCopy[1].BBB = "B2";
+    //     outfitsCopy[2].CCC = "C3";
+});
+//console.log(outfitsCopy);
+
+outfitsCopy.map((outfit) => {
+    const addProperty = () => {
+        return (outfit.Key = "Value");
+    };
+    addProperty(outfitsCopy);
+});
+//console.log(outfitsCopy);
+
+/* ------------------------------------copy Array ----copy (map) of outfits----------------------------*/
+//4-Make a copy (map) of outfits that contains on the properties of id, bottoms, tops and shoe
+const outfits_Properties = outfitsCopy.map((a) => {
+    return {
+        id: a.id,
+        bottoms: a.bottoms,
+        tpp: a.top,
+        shoes: a.shoes,
+    };
+});
+//console.log(outfits_Properties);
+
+/* ---------------------Filter_Id-----------------------------*/
+const Outfit_Filter_Id = outfitsCopy.filter((a) => {
+    const x = a.id;
+
+    return x > 7;
+});
+//console.log(Outfit_Filter_Id);
+
+/* ---------------------Filter_Bottoms-----------------------------*/
+const Outfits_Filter_Bottoms = outfitsCopy.filter((a) => {
+    const x = a.bottoms;
+    return x == "jeans" || x == "skirt";
+});
+//console.log(Outfits_Filter_Bottoms);
+
+/* ---------------------Filter_Type-----------------------------*/
+//filter outfits to give only outfits that are casual
+const Outfits_Filter_Type = outfitsCopy.filter((a) => {
+    const x = a.type;
+    return x == "casual";
+});
+//console.log(Outfits_Filter_Type);
+
+/* ---------------------Filter_Type-----------------------------*/
+// filter outfits to give only outfits that are owned
+const Outfits_Filter_Own = outfitsCopy.filter((a) => {
+    /*const x = a.own;
+    return x == true;*/
+    if (a.own) {
+        /* (a.own == false) */ return a;
+    }
+});
+//console.log(Outfits_Filter_Own);
+
+/* ---------------------Filter_Shoes-----------------------------*/
+// use find to return an outfit that has no shoes
+const Outfits_Filter_Shoes = outfitsCopy.filter((a) => {
+    return a.shoes == "none";
+});
+//console.log(Outfits_Filter_Shoes);
+
+/* ---------------------Filter_Boots-----------------------------*/
+// use find to return an outfit that has boots
+const Outfits_Filter_Boots = outfitsCopy.filter((a) => {
+    return a.shoes == "boots";
+});
+//console.log(Outfits_Filter_Boots);
+
+/* ---------------------Filter_Boots-----------------------------*/
+//Bonus:
+// use find to return an outfit that has jeans and a t-shirt
+const Filter_Bottoms_Top = outfitsCopy.find((a) => {
+    //return a.bottoms == "jeans" || a.top == "t-shirt"
+    if (a.bottoms == "jeans" && a.top == "t-shirt") {
+        return a;
+    }
+});
+//console.log(Filter_Bottoms_Top);
 
 /* ------------------------------------copy Array --------------------------------   -         */
 
-      const sheeps = ['Apple', 'Banana', 'Juice', "AAAA"];
+// const sheeps = ["Apple", "Banana", "Juice", "AAAA"];
 
-// Old way
-const cloneSheeps = sheeps.slice();
-//console.log(cloneSheeps);
+// // Old way
+// const cloneSheeps = sheeps.slice();
+// //console.log(cloneSheeps);
 
-// ES6 way
-const cloneSheepsES6 = [sheeps];
-//console.log(cloneSheepsES6);
+// // ES6 way
+// const cloneSheepsES6 = [...sheeps];
+// //console.log(cloneSheepsES6);
 
-var numbers = [1,2,3,4,5];
-var newNumbers = Object.assign([], numbers);
-//console.log(newNumbers);
+/* -------------------LOOP THROUGH ARRAY (WITH MAP) Practice-------------------------------*/
+// var Marray = [
+//     { a: "12", b: "10" },
+//     { a: "20", b: "22" },
+// ];
+
+// var NnewArray = Marray.map((x) => {
+//     //   x.C = String(x.b);
+//     //   x.D = String(x.b);
+//     //         x.Book = ("Nice") ;
+//     x.c = true;
+//     return x;
+// });
+
+// console.log(NnewArray);
+
+/* let Mar = [{
+        id: 1,
+        name: 'bill'
+      }, {
+        id: 2,
+        name: 'ted'
+      }]
+      
+      let Result = Mar.map(person => ({ value: person.id, text: person.name }));
+      console.log(Result) */
+
+/* const data = {name: "laptop", brands: ["dell", "acer", "asus"]}
+let inside_data = data.brands.map((i) => {
+	console.log(i); //dell acer asus
+}); */
+
+/* -------------------Iteration Review/Practice-------------------------------*/
+const animals = [
+    {
+        id: 3,
+        name: "Rex",
+        trait: "mischievous",
+        species: "dog",
+        isReal: true,
+    },
+    {
+        id: 9,
+        name: "Joel",
+        trait: "playful",
+        species: "dog",
+        isReal: true,
+    },
+    {
+        id: 5,
+        name: "Cleo",
+        trait: "friendly",
+        species: "rat",
+        isReal: true,
+    },
+    {
+        id: 8,
+        name: "Draco",
+        trait: "grumpy",
+        species: "dragon",
+        isReal: false,
+    },
+    {
+        id: 2,
+        name: "George",
+        trait: "curious",
+        species: "monkey",
+        isReal: true,
+    },
+    {
+        id: 1,
+        name: "Peanut",
+        trait: "needy",
+        species: "cat",
+        isReal: true,
+    },
+    {
+        id: 1,
+        name: "Lexi",
+        trait: "shyyyyy",
+        species: "cat",
+        isReal: true,
+    },
+];
+
+/* -------------------iterate over animals-------------------------------*/
+// iterate over animals and console log each animal by the following conditions:
+// if the animal is a dragon console log "I am mythical."
+// if the animal is a dog console log "I bark."
+// if the animal is a monkey or a rat console log the animals name and "I am a rat or monkey."
+// if the animal is a cat  is needy console log "I am Sydney's cat."
+// if the animal does not meet any of the above conditions console log the animals name, trait and species
+
+animals.map((animal) => {
+    //     if (animal.species === "dragon") {
+    //         console.log("I am mythical.");
+    //     } else if (animal.species === "dog") {
+    //         console.log("I bark");
+    //     } else if (animal.species == "monkey" || animal.species == "rat") {
+    //         console.log("I am a rat or monkey.");
+    //     } else if (animal.species === "cat") {
+    //         console.log("I am Sydney's cat.");
+    //     } else {
+    //         console.log (`the animals name is: ${animal.name}, trait: ${animal.trait}, isReal: ${animal.isReal}`)
+    //         };
+});
+
+/* -------------------SORT BY ID-------------------------------*/
+// BONUS:  Sort the array of animals by id.
+const sortAnimal = animals.sort((a, b) => a.id - b.id);
+console.log(sortAnimal);
